@@ -1,0 +1,129 @@
+.main-content .label-sizer {
+    padding: 4px 8px 4px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+.main-content .no-bs-padding {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+.main-content .no-table-border {
+    border-top: 0px !important;
+}
+.main-content .padding-bottom-5px {
+    border-top: 0px !important;
+}
+.main-content .btn-xsl {
+    padding: 3px 7px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+.main-content .btn:focus,.btn:active {
+    outline: none !important;
+}
+.main-content .panel.panel-nav-tabs .panel-heading{
+    padding: 5px 5px 0 5px;
+}
+.main-content .panel.panel-nav-tabs .nav-tabs{
+	border-bottom: none;
+}
+.main-content .panel.panel-nav-tabs .nav-justified{
+	margin-bottom: -1px;
+}
+.main-content .panel-nav-tabs.panel-default .nav-tabs > li > a,
+.main-content .panel-nav-tabs.panel-default .nav-tabs > li > a:hover,
+.main-content .panel-nav-tabs.panel-default .nav-tabs > li > a:focus {
+    color: #777;
+}
+.main-content .panel-nav-tabs.panel-default .nav-tabs > .open > a,
+.main-content .panel-nav-tabs.panel-default .nav-tabs > .open > a:hover,
+.main-content .panel-nav-tabs.panel-default .nav-tabs > .open > a:focus,
+.main-content .panel-nav-tabs.panel-default .nav-tabs > li > a:hover,
+.main-content .panel-nav-tabs.panel-default .nav-tabs > li > a:focus {
+    color: #777;
+	background-color: #ddd;
+	border-color: transparent;
+}
+.main-content .panel-nav-tabs.panel-default .nav-tabs > li.active > a,
+.main-content .panel-nav-tabs.panel-default .nav-tabs > li.active > a:hover,
+.main-content .panel-nav-tabs.panel-default .nav-tabs > li.active > a:focus {
+	color: #555;
+	background-color: #fff;
+	border-color: #ddd;
+	border-bottom-color: transparent;
+}
+.main-content .panel-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu {
+    background-color: #f5f5f5;
+    border-color: #ddd;
+}
+.main-content .panel-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a {
+    color: #777;   
+}
+.main-content .panel-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a:hover,
+.main-content .panel-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > li > a:focus {
+    background-color: #ddd;
+}
+.main-content .panel-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a,
+.main-content .panel-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a:hover,
+.main-content .panel-nav-tabs.panel-default .nav-tabs > li.dropdown .dropdown-menu > .active > a:focus {
+    color: #fff;
+    background-color: #555;
+}
+.main-content .btn:focus {
+    outline: none !important;
+}
+.textpulse-css {
+    animation: textpulse 1.5s ease-out;
+    animation-iteration-count: infinite; 
+    opacity: 1;
+}
+@-webkit-keyframes textpulse {
+    0% {opacity: 1.0;}
+    50% {opacity: 0.3;}
+    100% {opacity: 1.0;}
+}
+.main-content {
+    font-size: 14px;
+}
+.main-content .panel-heading h3 {
+    font-size: 16px;
+    font-weight: 400;
+}
+.main-content .panel-heading h4 {
+    font-size: 18px;
+    font-weight: 400;
+}
+.main-content .fa {
+    margin-right: 1px;
+}
+.main-content .modal-title {
+    font-weight: 400;
+}
+.main-content h4 {
+    font-weight: 400;
+    font-size: 18px;
+}
+.main-content h3 {
+    font-weight: 400;
+    font-size: 24px;
+}
+.main-content .col-form-label {
+    font-size: 14px;
+    line-height: 1.42857143;
+    font-weight: 600;
+}
+.main-content .modal-dialog .panel-heading {
+    padding: 15px;
+}
+.main-content .modal-dialog .modal-title {
+    line-height: 1.42857143;
+}
+.main-content .modal-dialog .modal-body {
+    margin-top: 10px;
+}
+.main-content .modal-dialog .panel-body {
+    padding: 15px !important;
+}
