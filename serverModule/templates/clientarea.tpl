@@ -123,13 +123,12 @@
                         {/if}
                     </ul>
                 </div>
-
                 <div class="panel-body">
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="accessdetails">
                             <div class='col-md-12 no-bs-padding'>
                                 <div class='col-md-6'>
-                                    <h4 class='padding-bottom-5px'>Данные для подключения</h4>
+                                    <h4 class='padding-bottom-5px'>{$LANG.BackupSpaceProftpd_data_to_connect}</h4>
                                     <table class='table'>
                                         <tbody>
                                         {if $domain}
@@ -158,13 +157,13 @@
                                         {/if}
                                         {if 'ftp'|array_key_exists:$allow_protocol}
                                             <tr>
-                                                <td>Порт ftp</td>
+                                                <td>{$LANG.BackupSpaceProftpd_port_ftp}</td>
                                                 <td>21</td>
                                             </tr>
                                         {/if}
                                         {if 'scp'|array_key_exists:$allow_protocol}
                                             <tr>
-                                                <td>Порт SCP/SFTP</td>
+                                                <td>{$LANG.BackupSpaceProftpd_port_scp}</td>
                                                 <td>22</td>
                                             </tr>
                                         {/if}
@@ -172,7 +171,7 @@
                                     </table>
                                 </div>
                                 <div class='col-md-6'>
-                                    <h4 class='padding-bottom-5px'>Информация об услуге</h4>
+                                    <h4 class='padding-bottom-5px'>{$LANG.BackupSpaceProftpd_service_information}</h4>
                                     <table class='table'>
                                         <tbody>
                                         <tr>
@@ -241,24 +240,23 @@
                         <div class="tab-pane fade" id="notifysetting">
                             <div class='col-md-12 no-bs-padding'>
                                 <div class='col-md-7'>
-                                    <h4 class='padding-bottom-5px'>Настройка уведомлений</h4>
+                                    <h4 class='padding-bottom-5px'>{$LANG.BackupSpaceProftpd_set_up_notifications}</h4>
                                     <table class='table'>
                                         <tbody>
                                         <tr>
-                                            <td style="width: 190px;">Уведомления</td>
+                                            <td style="width: 190px;">{$LANG.BackupSpaceProftpd_notifications}</td>
                                             <td>
                                                 <input id="notifyStatus" type="checkbox" data-toggle="toggle"
-                                                       data-on="Включены" data-off="Отключены" data-width="100"
+                                                       data-on="{$LANG.BackupSpaceProftpd_on}" data-off="{$LANG.BackupSpaceProftpd_off}" data-width="100"
                                                        data-size="mini">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="width: 190px;">Если занято больше чем</td>
+                                            <td style="width: 190px;">{$LANG.BackupSpaceProftpd_if_busy_more_than}</td>
                                             <td>
                                                 <select id="thresholdForNotification"
                                                         class="custom-select custom-select-sm">
-                                                    <option value="0" disabled selected>Выберите порог уведомлений
-                                                    </option>
+                                                    <option value="0" disabled selected>{$LANG.BackupSpaceProftpd_choose_a_notification_threshold} </option>
                                                     <option value="80">80%</option>
                                                     <option value="85">85%</option>
                                                     <option value="90">90%</option>
@@ -267,16 +265,15 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="width: 190px;">Уведомлять</td>
+                                            <td style="width: 190px;">{$LANG.BackupSpaceProftpd_notify}</td>
                                             <td>
                                                 <select id="NotificationDelay" class="custom-select custom-select-sm">
-                                                    <option value="0" disabled selected>Выберите частоту уведомлений
-                                                    </option>
-                                                    <option value="1">Каждый час</option>
-                                                    <option value="3">Каждые 3 часа</option>
-                                                    <option value="6">Каждые 6 часов</option>
-                                                    <option value="12">Каждые 12 часов</option>
-                                                    <option value="24">Каждые 24 часа</option>
+                                                    <option value="0" disabled selected>{$LANG.BackupSpaceProftpd_choose_notification_frequency}</option>
+                                                    <option value="1">{$LANG.BackupSpaceProftpd_every_hour}</option>
+                                                    <option value="3">{$LANG.BackupSpaceProftpd_every_3_hours}</option>
+                                                    <option value="6">{$LANG.BackupSpaceProftpd_Every_6_hours}</option>
+                                                    <option value="12">{$LANG.BackupSpaceProftpd_every_12_hours}</option>
+                                                    <option value="24">{$LANG.BackupSpaceProftpd_every_24_hours}</option>
                                                 </select>
                                             </td>
                                         </tr>
@@ -321,7 +318,9 @@
                         $("#thresholdForNotification").val(data.data.threshold);
                     },
                     error: function (data) {
-                        $.notify("не удалось загрузить id шаблона", "error");
+                        {/literal}
+                        $.notify("{$LANG.BackupSpaceProftpd_failed_to_load_notification_threshold_information}", "error");
+                        {literal}
                     },
                 });
                 $.ajax({
@@ -339,7 +338,9 @@
                         $("#NotificationDelay").val(data.data.delay);
                     },
                     error: function (data) {
-                        $.notify("не удалось загрузить id шаблона", "error");
+                        {/literal}
+                        $.notify("{$LANG.BackupSpaceProftpd_failed_to_load_notification_period_information}", "error");
+                        {literal}
                     },
                 });
                 $.ajax({
@@ -365,7 +366,9 @@
                         }
                     },
                     error: function (data) {
-                        $.notify("не удалось загрузить статус email уведомлений", "error");
+                        {/literal}
+                        $.notify("{$LANG.BackupSpaceProftpd_failed_to_load_email_notification_status}", "error");
+                        {literal}
                     },
                 });
 
@@ -384,10 +387,14 @@
                         },
                         dataType: 'json',
                         success: function (data) {
-                            $.notify("Изменения сохранены", "success");
+                            {/literal}
+                            $.notify("{$LANG.BackupSpaceProftpd_changes_saved}", "success");
+                            {literal}
                         },
                         error: function (data) {
-                            $.notify("Изменения не сохранены", "error");
+                            {/literal}
+                            $.notify("{$LANG.BackupSpaceProftpd_changes_not_saved}", "error");
+                            {literal}
                         },
                     });
                 });
@@ -406,10 +413,14 @@
                         },
                         dataType: 'json',
                         success: function (data) {
-                            $.notify("Изменения сохранены", "success");
+                            {/literal}
+                            $.notify("{$LANG.BackupSpaceProftpd_changes_saved}", "success");
+                            {literal}
                         },
                         error: function (data) {
-                            $.notify("Изменения не сохранены", "error");
+                            {/literal}
+                            $.notify("{$LANG.BackupSpaceProftpd_changes_not_saved}", "error");
+                            {literal}
                         },
                     });
                 });
@@ -427,10 +438,14 @@
                         },
                         dataType: 'json',
                         success: function (data) {
-                            $.notify("Изменения сохранены", "success");
+                            {/literal}
+                            $.notify("{$LANG.BackupSpaceProftpd_changes_saved}", "success");
+                            {literal}
                         },
                         error: function (data) {
-                            $.notify("Изменения не сохранены", "error");
+                            {/literal}
+                            $.notify("{$LANG.BackupSpaceProftpd_changes_not_saved}", "error");
+                            {literal}
                         },
                     });
                 });
@@ -452,7 +467,7 @@
     </div>
 {elseif $systemStatus=='Suspended'}
     <div class='col-md-12'>
-        <div class='alert alert-warning'>Услуга отключена за неуплату</div>
+        <div class='alert alert-warning'>{$LANG.BackupSpaceProftpd_the_service_is_disabled_for_non_payment}</div>
     </div>
 {/if}
 

@@ -270,6 +270,16 @@ function BackupSpaceProftpd_TerminateAccount(array $params)
 
 function BackupSpaceProftpd_ClientArea(array $params)
 {
+    global  $_LANG;
+    $defaultLanguage = 'russian';
+    $clientLanguage = $params['clientsdetails']['language'];
+
+    if (file_exists(sprintf(ModuleConfig::getBaseFullPath() . '/serverModule/lang/%s.php', $clientLanguage))) {
+        include_once sprintf(ModuleConfig::getBaseFullPath() . '/serverModule/lang/%s.php', $clientLanguage);
+    } else {
+        include_once sprintf(ModuleConfig::getBaseFullPath() . '/serverModule/lang/%s.php', $defaultLanguage);
+    }
+
     try {
         $api = new ProFTPDController($params['serverid']);
         $account = $api->getAccountStats($params['username']);
@@ -304,7 +314,7 @@ function BackupSpaceProftpd_ClientArea(array $params)
                 'service_id' => $params['serviceid'],
                 'allow_protocol' => [],
                 'sign' => sha1($params['userid'] . ModuleConfig::getSecret()),
-                'error' => 'В данный момент удаленный сервер не отвечает на запросы',
+                'error' => $_LANG['BackupSpaceProftpd_the_remote_server_is_not_currently_responding'],
                 'diskspaceUsed' => 0,
                 'diskspaceTotal' => 0,
                 'diskspaceUsedInPercent' => 0,
