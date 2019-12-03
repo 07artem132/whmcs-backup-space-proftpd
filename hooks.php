@@ -13,7 +13,15 @@ use WHMCS\Module\Addon\BackupSpaceProftpd\Exceptions\InvalidServerIdException;
 use WHMCS\Service\Service;
 
 add_hook('ClientAreaPageUpgrade', 1, function ($vars) {
+    $service = Service::find($vars['id']);
+    $product = $service->product()->first();
+
+    if ($product->servertype !== 'BackupSpaceProftpd') {
+        return [];
+    }
+
     global $_LANG;
+
     $defaultLanguage = 'russian';
     $clientLanguage = $vars['clientsdetails']['language'];
 
@@ -25,8 +33,6 @@ add_hook('ClientAreaPageUpgrade', 1, function ($vars) {
 
 
     $configoptions = $vars['configoptions'];
-    $service = Service::find($vars['id']);
-    $product = $service->product()->first();
     $configOptionSpace = explode(' - ', $product['configoption2'])[1];
     $configOptionLocation = explode(' - ', $product['configoption1'])[1];
     $errormessage = '';

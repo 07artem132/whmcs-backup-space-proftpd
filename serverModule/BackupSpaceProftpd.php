@@ -290,7 +290,7 @@ function BackupSpaceProftpd_ClientArea(array $params)
                 'user_id' => $params['userid'],
                 'service_id' => $params['serviceid'],
                 'sign' => sha1($params['userid'] . ModuleConfig::getSecret()),
-                'dedicatedip' => $params['serverip'],
+                'dedicatedip' => $params['serverhostname'],
                 'allow_protocol' => array_flip($node['allow_protocol']),
                 'diskspaceUsed' => $account['disk_use_format'],
                 'diskspaceTotal' => $account['disk_space_format'],
@@ -309,7 +309,7 @@ function BackupSpaceProftpd_ClientArea(array $params)
         return array(
             'tabOverviewReplacementTemplate' => 'templates/clientarea.tpl',
             'templateVariables' => array(
-                'dedicatedip' => '127.0.0.1',
+                'dedicatedip' => $params['serverhostname'],
                 'user_id' => $params['userid'],
                 'service_id' => $params['serviceid'],
                 'allow_protocol' => [],
