@@ -1,9 +1,28 @@
 <?php
-/**
- *  Created by PhpStorm.
- *  User: Артём
- *  Date time: 01.12.2019, 16:20
- *
- */
-
-
+$_LANG['BackupSpaceProftpd_data_to_connect'] = 'Connect information';
+$_LANG['BackupSpaceProftpd_port_ftp'] = 'Port FTP';
+$_LANG['BackupSpaceProftpd_port_scp'] = 'Port SCP/SFTP';
+$_LANG['BackupSpaceProftpd_service_information'] = 'Service information';
+$_LANG['BackupSpaceProftpd_set_up_notifications'] = 'Notification Config';
+$_LANG['BackupSpaceProftpd_on'] = 'On';
+$_LANG['BackupSpaceProftpd_off'] = 'Off';
+$_LANG['BackupSpaceProftpd_notifications'] = 'Notifications';
+$_LANG['BackupSpaceProftpd_if_busy_more_than'] = 'If taken more than';
+$_LANG['BackupSpaceProftpd_choose_a_notification_threshold'] = 'Choose notification threshold';
+$_LANG['BackupSpaceProftpd_notify'] = 'Notify';
+$_LANG['BackupSpaceProftpd_choose_notification_frequency'] = 'Choose notification frequency';
+$_LANG['BackupSpaceProftpd_every_hour'] = 'Every hours';
+$_LANG['BackupSpaceProftpd_every_3_hours'] = 'Every 3 hours';
+$_LANG['BackupSpaceProftpd_Every_6_hours'] = 'Every 6 hours';
+$_LANG['BackupSpaceProftpd_every_12_hours'] = 'Every 12 hours';
+$_LANG['BackupSpaceProftpd_every_24_hours'] = 'Every 24 hours';
+$_LANG['BackupSpaceProftpd_failed_to_load_notification_period_information'] = 'Failed to load state of frequencies notify';
+$_LANG['BackupSpaceProftpd_failed_to_load_notification_threshold_information'] = 'Failed to load state of thresholds notify';
+$_LANG['BackupSpaceProftpd_failed_to_load_email_notification_status'] = 'Failed to load state of email notify';
+$_LANG['BackupSpaceProftpd_changes_saved'] = 'Saved';
+$_LANG['BackupSpaceProftpd_changes_not_saved'] = 'Failed to save';
+$_LANG['BackupSpaceProftpd_the_service_is_disabled_for_non_payment'] = 'The service is disabled for non-payment';
+$_LANG['BackupSpaceProftpd_the_remote_server_is_not_currently_responding'] = 'The remote server is not responding';
+$_LANG['BackupSpaceProftpd_you_have_assigned_less_space_than_used'] = 'You have choose less space than used';
+$_LANG['BackupSpaceProftpd_general_info'] = 'General Information';
+$_LANG['BackupSpaceProftpd_notify_config'] = 'Config Notifications';

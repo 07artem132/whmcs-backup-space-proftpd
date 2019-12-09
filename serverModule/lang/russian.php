@@ -1,21 +1,6 @@
 <?php
-/**
- *  Created by PhpStorm.
- *  User: Артём
- *  Date time: 01.12.2019, 16:26
- *
- */
-
-/**
- *  Created by PhpStorm.
- *  User: Артём
- *  Date time: 01.12.2019, 15:59
- *
- */
-
-
 $_LANG['BackupSpaceProftpd_data_to_connect'] = 'Данные для подключения';
-$_LANG['BackupSpaceProftpd_port_ftp'] = 'Порт ftp';
+$_LANG['BackupSpaceProftpd_port_ftp'] = 'Порт FTP';
 $_LANG['BackupSpaceProftpd_port_scp'] = 'Порт SCP/SFTP';
 $_LANG['BackupSpaceProftpd_service_information'] = 'Информация об услуге';
 $_LANG['BackupSpaceProftpd_set_up_notifications'] = 'Настройка уведомлений';
@@ -37,7 +22,7 @@ $_LANG['BackupSpaceProftpd_failed_to_load_email_notification_status'] = 'не у
 $_LANG['BackupSpaceProftpd_changes_saved'] = 'Изменения сохранены';
 $_LANG['BackupSpaceProftpd_changes_not_saved'] = 'Изменения не сохранены';
 $_LANG['BackupSpaceProftpd_the_service_is_disabled_for_non_payment'] = 'Услуга отключена за неуплату';
-
 $_LANG['BackupSpaceProftpd_the_remote_server_is_not_currently_responding'] = 'В данный момент удаленный сервер не отвечает на запросы';
-
 $_LANG['BackupSpaceProftpd_you_have_assigned_less_space_than_used'] = 'Вы задали места меньше чем используется';
+$_LANG['BackupSpaceProftpd_general_info'] = 'Основная информация';
+$_LANG['BackupSpaceProftpd_notify_config'] = 'Настройка уведомлений';

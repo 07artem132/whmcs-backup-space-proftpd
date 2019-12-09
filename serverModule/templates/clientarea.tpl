@@ -106,12 +106,12 @@
                     <ul class="nav nav-tabs">
                         <li class="active">
                             <a href="#accessdetails" data-toggle="tab">
-                                <i class="fas fa-user-circle"></i> Основная информация
+                                <i class="fas fa-user-circle"></i> {$LANG.BackupSpaceProftpd_general_info}
                             </a>
                         </li>
                         <li>
                             <a href="#notifysetting" data-toggle="tab">
-                                <i class="far fa-bell"></i> Настройка уведомлений
+                                <i class="far fa-bell"></i> {$LANG.BackupSpaceProftpd_notify_config}
                             </a>
                         </li>
                         {if $configurableoptions || $customfields}
