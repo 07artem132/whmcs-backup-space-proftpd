@@ -66,23 +66,45 @@ function BackupSpaceProftpd_CreateAccount($params)
         $prefix = $params['configoption3'];//префикс
         $serviceId = $params['serviceid'];//префикс
         $space = (int)filter_var($params['configoptions'][$configOptionSpace], FILTER_SANITIZE_NUMBER_INT); //место
-        $serverIdFromLocation = collect(Capsule::table("tblservergroupsrel")
+        $serverIdsFromLocation = collect(Capsule::table("tblservergroupsrel")
+            ->selectRaw('tblservers.id,tblservers.maxaccounts,tblservergroups.filltype,((SELECT COUNT(id) FROM tblhosting WHERE tblhosting.server=tblservers.id AND domainstatus IN (\'Active\', \'Suspended\'))+(SELECT COUNT(id) FROM tblhostingaddons WHERE tblhostingaddons.server=tblservers.id AND status IN (\'Active\', \'Suspended\'))) AS usagecount')
             ->where('tblservergroups.name', '=', $location)
+            ->where('tblservers.disabled', '=', 0)
             ->join('tblservers', 'tblservergroupsrel.serverid', '=', 'tblservers.id')
             ->join('tblservergroups', 'tblservergroups.id', '=', 'tblservergroupsrel.groupid')
-            ->get(['tblservers.id']))
+            ->get())
             ->keyBy('id')
             ->transform(function ($item) {
-                $api = new ProFTPDController($item->id);
-                $stats = $api->status();
-                return ((float)$stats['disk_free_without_quota'] * (float)$stats['oversell']) - (float)$stats['disk_use'];
+                $item = (array)$item;
+                try {
+                    $api = new ProFTPDController($item['id']);
+                    $stats = $api->status();
+                } catch (\Exception $e) {
+                    $item['disk_free'] = 100000000000000000;
+                    return $item;
+                }
+                $item['disk_free'] = (((float)$stats['disk_free_without_quota'] * (float)$stats['oversell']) - (float)$stats['disk_use']);
+                return $item;
             })->filter(function ($value) {
-                return $value > 0;
+                return $value['disk_free'] > 0;
             })->filter(function ($value) use ($space) {
-                return $value > ($space * 1073741824);
-            })->sortByDesc(function ($value) {
-                return $value;
+                return $value['disk_free'] > ($space * 1073741824);
+            })->filter(function ($value) {
+                return $value['usagecount'] < $value['maxaccounts'];
+            });
+        if($serverIdsFromLocation->first()['filltype']==1){
+            $serverIdFromLocation=  $serverIdsFromLocation->sortBy(function ($value) {
+                //filltype=1  Создавать аккаунты на наименее заполненном сервере
+                //filltype=2  Заполнить активный сервер, после чего перейти к наименее заполненному
+                return $value['usagecount'];
             })->keys()->first();
+        }else {
+            $serverIdFromLocation=  $serverIdsFromLocation->sortByDesc(function ($value) {
+                //filltype=1  Создавать аккаунты на наименее заполненном сервере
+                //filltype=2  Заполнить активный сервер, после чего перейти к наименее заполненному
+                return $value['usagecount'];
+            })->keys()->first();
+        }
 
         if ($serverIdFromLocation === null) {
             return 'К сожалению нет сервера с достаточным кол-вом свободного места';
@@ -270,7 +292,7 @@ function BackupSpaceProftpd_TerminateAccount(array $params)
 
 function BackupSpaceProftpd_ClientArea(array $params)
 {
-    global  $_LANG;
+    global $_LANG;
     $defaultLanguage = 'russian';
     $clientLanguage = $params['clientsdetails']['language'];
 
