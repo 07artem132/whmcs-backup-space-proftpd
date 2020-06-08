@@ -80,7 +80,7 @@ function BackupSpaceProftpd_CreateAccount($params)
                     $api = new ProFTPDController($item['id']);
                     $stats = $api->status();
                 } catch (\Exception $e) {
-                    $item['disk_free'] = 100000000000000000;
+                    $item['disk_free'] = 0;
                     return $item;
                 }
                 $item['disk_free'] = (((float)$stats['disk_free_without_quota'] * (float)$stats['oversell']) - (float)$stats['disk_use']);
