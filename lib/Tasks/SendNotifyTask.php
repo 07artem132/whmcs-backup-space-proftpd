@@ -110,7 +110,7 @@ class SendNotifyTask implements TaskInterfaces
                 if ($task->last_notify != null) {
                     $lastNotify = Carbon::parse($task->last_notify);
                     $nextNotify = $lastNotify->copy()->addHour($task->delay);
-                    echo 'Отправка через: '.Carbon::now()->diffInSeconds($nextNotify,false).' сек.'.PHP_EOL;
+                    echo 'Отправка для '.$task->service->username.' через: '.Carbon::now()->diffInSeconds($nextNotify,false).' сек.'.PHP_EOL;
                     if (Carbon::now()->diffInSeconds($nextNotify,false) > 0) {
                         echo sprintf(
                                 'Пропускаем отправку для %s так как ему уже отправили в %s следующая отправка не раньше %s',
