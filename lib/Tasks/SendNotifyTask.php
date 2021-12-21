@@ -106,19 +106,25 @@ class SendNotifyTask implements TaskInterfaces
         }
 
         foreach ($NotifyTasks as $task) {
-            if ($task->last_notify != null) {
-                $lastNotify = Carbon::parse($task->last_notify);
-                $nextNotify = $lastNotify->copy()->addHour($task->delay);
-                if ($lastNotify->diffInSeconds($nextNotify, false) > 0) {
-                    echo sprintf(
-                            'Пропускаем отправку для %s так как ему уже отправили в %s следующая отправка не раньше %s',
-                            $task->service->username,
-                            $lastNotify,
-                            $nextNotify
-                        ) . PHP_EOL;
-                    continue;
+            try {
+                if ($task->last_notify != null) {
+                    $lastNotify = Carbon::parse($task->last_notify);
+                    $nextNotify = $lastNotify->copy()->addHour($task->delay);
+                    echo 'Отправка через: '.Carbon::now()->diffInSeconds($nextNotify,false).' сек.'.PHP_EOL;
+                    if (Carbon::now()->diffInSeconds($nextNotify,false) > 0) {
+                        echo sprintf(
+                                'Пропускаем отправку для %s так как ему уже отправили в %s следующая отправка не раньше %s',
+                                $task->service->username,
+                                $lastNotify,
+                                $nextNotify
+                            ) . PHP_EOL;
+                        continue;
+                    }
                 }
+            } catch (\Exception $e) {
+                echo $e->getMessage();
             }
+
             $result[$task->service->server][] = [
                 'threshold' => $task->threshold,
                 'emailNotify' => $task->service->client->email,
@@ -127,8 +133,8 @@ class SendNotifyTask implements TaskInterfaces
                 'user_id' => $task->service->clientId,
                 'model' => $task,
             ];
-        }
 
+        }
         return $result;
     }
 }
