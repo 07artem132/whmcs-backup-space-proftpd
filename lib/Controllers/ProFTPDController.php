@@ -18,6 +18,7 @@ use WHMCS\Module\Addon\BackupSpaceProftpd\Traits\ByteConvertTraits;
 class ProFTPDController
 {
     use ByteConvertTraits;
+
     private $url;
     private $uid;
     private $token;
@@ -43,7 +44,7 @@ class ProFTPDController
         $urlPrefix = empty($server->secure) ? 'http://' : 'https://';
         $urlPort = $server->port ? $server->port : 5000;
 
-        $url = $urlPrefix . $server->ipaddress . ':' . $urlPort . '/api/';
+        $url = $urlPrefix . $server->hostname . ':' . $urlPort . '/api/';
 
         $this->uid = $server->username;
         $this->token = decrypt($server->password);
@@ -53,9 +54,7 @@ class ProFTPDController
             'base_url' => $this->url,
             'timeout' => 2.0,
             'defaults' => [
-                'auth' => [
-                    $this->uid, $this->token
-                ]
+                // 'auth' => [$this->uid, $this->token ]
             ]
         ]);
     }
@@ -66,7 +65,8 @@ class ProFTPDController
      */
     public function status()
     {
-        $response = $this->http_client->get('node/status')->json();
+        $response = json_decode($this->http_client->get($this->url . 'node/status', ['auth' => [$this->uid, $this->token]])->getBody()->getContents(), true);
+
         return $response;
     }
 
@@ -79,13 +79,14 @@ class ProFTPDController
      */
     public function createAccount($login, $password, $quota)
     {
-        return $this->http_client->post('user', [
+        return json_decode($this->http_client->post($this->url . 'user', [
             'body' => [
                 'login' => $login,
                 'password' => $password,
                 'quota' => $quota,
-            ]
-        ])->json();
+            ],
+            'auth' => [$this->uid, $this->token]
+        ])->getBody()->getContents(), true);
     }
 
     /**
@@ -95,7 +96,7 @@ class ProFTPDController
      */
     public function deleteAccount($username)
     {
-        return $this->http_client->delete($username)->json();
+        return json_decode($this->http_client->delete($this->url . $username, ['auth' => [$this->uid, $this->token]])->getBody()->getContents(), true);
     }
 
     /**
@@ -106,11 +107,12 @@ class ProFTPDController
      */
     public function updateQuota($username, int $quota)
     {
-        return $this->http_client->put($username . '/quota', [
+        return json_decode($this->http_client->put($this->url . $username . '/quota', [
             'body' => [
                 'quota' => $quota,
-            ]
-        ])->json();
+            ],
+            'auth' => [$this->uid, $this->token]
+        ])->getBody()->getContents(), true);
     }
 
     /**
@@ -121,11 +123,12 @@ class ProFTPDController
      */
     public function changePassword($username, $password)
     {
-        return $this->http_client->put($username . '/password', [
+        return json_decode($this->http_client->put($this->url . $username . '/password', [
             'body' => [
                 'password' => $password,
-            ]
-        ])->json();
+            ],
+            'auth' => [$this->uid, $this->token]
+        ])->getBody()->getContents(), true);
     }
 
     /**
@@ -135,7 +138,7 @@ class ProFTPDController
      */
     public function getAccountStats($username)
     {
-        $response = $this->http_client->get($username)->json();
+        $response = json_decode($this->http_client->get($this->url . $username, ['auth' => [$this->uid, $this->token]])->getBody()->getContents(), true);
         if ($response['disk_use'] == 0) {
             $response['disk_use'] = 1;
         }
@@ -152,10 +155,10 @@ class ProFTPDController
      */
     public function setOversell($oversell)
     {
-        return $this->http_client->put('node/oversell', [
+        return json_decode($this->http_client->put($this->url . 'node/oversell', [
             'body' => [
                 'oversell' => $oversell,
-            ]
-        ])->json();
+            ], 'auth' => [$this->uid, $this->token]
+        ])->getBody()->getContents(), true);
     }
 }
