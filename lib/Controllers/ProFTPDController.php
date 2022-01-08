@@ -80,7 +80,7 @@ class ProFTPDController
     public function createAccount($login, $password, $quota)
     {
         return json_decode($this->http_client->post($this->url . 'user', [
-            'body' => [
+            'form_params' => [
                 'login' => $login,
                 'password' => $password,
                 'quota' => $quota,
@@ -108,7 +108,7 @@ class ProFTPDController
     public function updateQuota($username, int $quota)
     {
         return json_decode($this->http_client->put($this->url . $username . '/quota', [
-            'body' => [
+            'form_params' => [
                 'quota' => $quota,
             ],
             'auth' => [$this->uid, $this->token]
@@ -124,7 +124,7 @@ class ProFTPDController
     public function changePassword($username, $password)
     {
         return json_decode($this->http_client->put($this->url . $username . '/password', [
-            'body' => [
+            'form_params' => [
                 'password' => $password,
             ],
             'auth' => [$this->uid, $this->token]
@@ -156,7 +156,7 @@ class ProFTPDController
     public function setOversell($oversell)
     {
         return json_decode($this->http_client->put($this->url . 'node/oversell', [
-            'body' => [
+            'form_params' => [
                 'oversell' => $oversell,
             ], 'auth' => [$this->uid, $this->token]
         ])->getBody()->getContents(), true);
